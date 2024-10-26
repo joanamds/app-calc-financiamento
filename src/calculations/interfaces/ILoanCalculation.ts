@@ -1,3 +1,5 @@
+import CalculationOption from './CalculationOption';
+
 interface ILoanCalculation {
   loanAmount: number;             // Valor do empréstimo
   interestRate: number;           // Taxa de juros
