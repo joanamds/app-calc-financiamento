@@ -1,6 +1,7 @@
-import ILoanCalculator from './interfaces/ILoanCalculation';
+import { ILoanCalculation } from './interfaces/ILoanCalculation';
+import { InstallmentDetail } from './interfaces/InstallmentDetail';
 
-class LoanCalculator implements ILoanCalculator {
+abstract class LoanCalculator implements ILoanCalculation {
   loanAmount: number;
   interestRate: number;
   installmentCount: number;
@@ -24,9 +25,15 @@ class LoanCalculator implements ILoanCalculator {
       this.correctionRate = correctionRate;
   }
 
-  calculateInstallments(): number[] {
-    return [];
+  abstract calculateInstallments(
+    loanAmount: number, 
+    interestRate: number, 
+    installmentCount: number, 
+    loanMonth: number, 
+    loanYear: number, 
+    correctionRate?: number
+  ): InstallmentDetail[];
 }
-}
+
 
 export default LoanCalculator;
