@@ -1,7 +1,7 @@
 import { InstallmentDetail } from "./interfaces/InstallmentDetail";
 import LoanCalculator from "./LoanCalculator";
 
-class PreFixedOnBalance extends LoanCalculator {
+export default class PreFixedOnBalance extends LoanCalculator {
   calculateInstallments(
     loanAmount: number,
     interestRate: number,
@@ -52,7 +52,4 @@ class PreFixedOnBalance extends LoanCalculator {
     }
     return installments;
   }
-  }
-
-
-export default PreFixedOnBalance;
+}
