@@ -13,3 +13,7 @@
 button {
   margin-top: 20px; /* Espaçamento acima do botão */
 }
+
+.button-spacing {
+  margin: 8px; /* Adicione a margem desejada */
+}

@@ -1,10 +1,13 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 import { CalculationOption } from "../calculations/types/CalculationOption";
 import LoanContext from "../context/LoanContext";
 import { Input, Label, Form, Button, Row, Col, FormGroup } from 'reactstrap';
 import { PreFixedOnBalance, PreFixedOnInstallment, PostFixedOnBalanceWithCorrection, PostFixedOnBalanceWithInstallmentCorrection, PostFixedOnInstallmentWithCorrection } from "../calculations";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRedo } from '@fortawesome/free-solid-svg-icons';
 
 function LoanForm(): JSX.Element {
+  const formRef = useRef<HTMLFormElement>(null);
   const [loanAmount, setLoanAmount] = useState<number>(0);
   const [interestRate, setInterestRate] = useState<string>("");
   const [installmentCount, setInstallmentCount] = useState<number>(0);
@@ -12,12 +15,25 @@ function LoanForm(): JSX.Element {
   const [loanYear, setLoanYear] = useState<number>(0);
   const [calculationType, setCalculationType] = useState<CalculationOption>(CalculationOption.PreFixedOnBalance);
   const [correctionRate, setCorrectionRate] = useState<number>(0);
-  const { setTotalCalculation } = useContext(LoanContext);
+  const { totalCalculation, setTotalCalculation } = useContext(LoanContext);
 
   const handleInterestRateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value.replace("%", "").replace(",", ".");
     setInterestRate(input);
   };
+
+  const handleReset = () => {
+    formRef.current?.reset();
+    setLoanAmount(0);
+    setInterestRate("");
+    setInstallmentCount(0);
+    setCalculationType(CalculationOption.PreFixedOnBalance);
+    setLoanMonth(0);
+    setLoanYear(0);
+    setCorrectionRate(0);
+    setTotalCalculation([]);  
+  };
+
 
   const CalculationOptionTitles: Record<CalculationOption, string> = {
     [CalculationOption.PreFixedOnBalance]: "Pré-fixado - Juros sobre Saldo Devedor",
@@ -115,10 +131,17 @@ function LoanForm(): JSX.Element {
           </Col>
         </Row>
       )}
-
-      <Button color="primary" onClick={handleClick}>
+      <Button color="primary" onClick={handleClick} className="button-spacing">
         Calcular
-      </Button>
+      </Button> 
+      {
+        totalCalculation.length > 0 && (
+          <Button onClick={ handleReset } className="button-spacing">
+            Refazer
+            <FontAwesomeIcon icon={ faRedo } />
+          </Button>
+        )
+      }
     </Form>
   );
 }

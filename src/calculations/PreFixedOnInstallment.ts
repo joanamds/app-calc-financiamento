@@ -23,7 +23,6 @@ export default class PreFixedOnInstallment extends LoanCalculator {
             paymentDate: `01/${loanMonth.toString().padStart(2, '0')}/${loanYear}`,
             principal: (0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
             interest: (0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
-            correction: (0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
             totalPayment: (0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
             balance: balance.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
           };

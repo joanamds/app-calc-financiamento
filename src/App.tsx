@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './components/Header';
 import LoanForm from './components/Form';
-import Table from './components/Table';
+import LoanTable from './components/Table';
 import './App.css';
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       <Header />
       <LoanForm />
-      <Table />
+      <LoanTable />
     </div>
   );
 }

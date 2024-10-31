@@ -24,7 +24,6 @@ export default class PreFixedOnBalance extends LoanCalculator {
           paymentDate: `01/${loanMonth.toString().padStart(2, '0')}/${loanYear}`,
           principal: (0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
           interest: (0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
-          correction: (0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
           totalPayment: (0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
           balance: balance.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
         };
@@ -43,7 +42,7 @@ export default class PreFixedOnBalance extends LoanCalculator {
           paymentDate: formattedDate,
           principal: amortizacaoFixa.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
           interest: interest.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
-          correction: (0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
+          // correction: (0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
           totalPayment: totalPayment.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
           balance: balance.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
         };
