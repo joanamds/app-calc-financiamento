@@ -102,6 +102,7 @@ function Form(): JSX.Element {
       correctionRate
     );
 
+    console.log(installmentDetails);
     setTotalCalculation(installmentDetails);
   };
 

@@ -1,18 +1,19 @@
-import React, { useMemo, PropsWithChildren } from 'react';
+import React, { useState, ReactNode } from 'react';
+import { InstallmentDetail } from '../calculations/types/InstallmentDetail';
 import LoanContext from './LoanContext';
-import TotalInformation from './types/TotalInformation';
 
-const LoanProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
-  const totalInformation = useMemo<TotalInformation>(() => ({
-    totalCalculation: [],
-    setTotalCalculation: () => {},
-  }), []);
+interface LoanProviderProps {
+  children: ReactNode;
+}
+
+const LoanProvider: React.FC<LoanProviderProps> = ({ children }) => {
+  const [totalCalculation, setTotalCalculation] = useState<InstallmentDetail[]>([]);
 
   return (
-    <LoanContext.Provider value={totalInformation}>
+    <LoanContext.Provider value={{ totalCalculation, setTotalCalculation }}>
       {children}
     </LoanContext.Provider>
   );
 };
 
-export default LoanProvider;
+export { LoanProvider };

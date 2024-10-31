@@ -1,6 +1,7 @@
 import { InstallmentDetail } from "../../calculations/types/InstallmentDetail";
+import { Dispatch, SetStateAction } from "react";
 
 export default interface TotalInformation {
   totalCalculation: InstallmentDetail[]
-  setTotalCalculation: React.Dispatch<React.SetStateAction<InstallmentDetail[]>>
+  setTotalCalculation: Dispatch<SetStateAction<InstallmentDetail[]>>;
 }
