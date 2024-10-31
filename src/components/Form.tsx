@@ -1,14 +1,22 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { CalculationOption } from "../calculations/types/CalculationOption";
+import LoanContext from "../context/LoanContext";
+import { PreFixedOnBalance,
+  PreFixedOnInstallment,
+  PostFixedOnBalanceWithCorrection,
+  PostFixedOnBalanceWithInstallmentCorrection,
+  PostFixedOnInstallmentWithCorrection
+} from "../calculations";
 
 function Form(): JSX.Element {
-  const [loanAmount, setLoanAmount] = useState<number | undefined>();
+  const [loanAmount, setLoanAmount] = useState<number>(0);
   const [interestRate, setInterestRate] = useState<string>("");
-  const [installmentCount, setInstallmentCount] = useState<number | undefined>();
-  const [loanMonth, setLoanMonth] = useState<number | undefined>();
-  const [loanYear, setLoanYear] = useState<number | undefined>();
-  const [calculationType, setCalculationType] = useState<CalculationOption | undefined>();
-  const [correctionRate, setCorrectionRate] = useState<number | undefined>();
+  const [installmentCount, setInstallmentCount] = useState<number>(0);
+  const [loanMonth, setLoanMonth] = useState<number>(0);
+  const [loanYear, setLoanYear] = useState<number>(0);
+  const [calculationType, setCalculationType] = useState<CalculationOption>(CalculationOption.PreFixedOnBalance);
+  const [correctionRate, setCorrectionRate] = useState<number>(0);
+  const { setTotalCalculation } = useContext(LoanContext);
 
   const handleInterestRateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value.replace("%", "").replace(",", ".");
@@ -23,6 +31,80 @@ function Form(): JSX.Element {
     [CalculationOption.PostFixedOnBalanceWithInstallmentCorrection]: "Pós-fixado - Juros sobre Saldo Devedor e Correção na Parcela"
   };
 
+  const handleClick = () => {
+    let calculator;
+
+    switch (calculationType) {
+      case CalculationOption.PreFixedOnBalance:
+        calculator = new PreFixedOnBalance(
+          loanAmount,
+          Number(interestRate),
+          installmentCount,
+          loanMonth,
+          loanYear
+        );
+        break;
+      case CalculationOption.PreFixedOnInstallment:
+        calculator = new PreFixedOnInstallment(
+          loanAmount,
+          Number(interestRate),
+          installmentCount,
+          loanMonth,
+          loanYear
+        );
+        break;
+      case CalculationOption.PostFixedOnBalanceWithCorrection:
+        calculator = new PostFixedOnBalanceWithCorrection(
+          loanAmount,
+          Number(interestRate),
+          installmentCount,
+          loanMonth,
+          loanYear,
+          correctionRate
+        );
+        break;
+      case CalculationOption.PostFixedOnInstallmentWithCorrection:
+        calculator = new PostFixedOnInstallmentWithCorrection(
+          loanAmount,
+          Number(interestRate),
+          installmentCount,
+          loanMonth,
+          loanYear,
+          correctionRate
+        );
+        break;
+      case CalculationOption.PostFixedOnBalanceWithInstallmentCorrection:
+        calculator = new PostFixedOnBalanceWithInstallmentCorrection(
+          loanAmount,
+          Number(interestRate),
+          installmentCount,
+          loanMonth,
+          loanYear,
+          correctionRate
+        );
+        break;
+      default:
+        calculator = new PreFixedOnBalance(
+          loanAmount,
+          Number(interestRate),
+          installmentCount,
+          loanMonth,
+          loanYear
+        );
+    }
+
+    const installmentDetails = calculator.calculateInstallments(
+      loanAmount,
+      Number(interestRate),
+      installmentCount,
+      loanMonth,
+      loanYear,
+      correctionRate
+    );
+
+    setTotalCalculation(installmentDetails);
+  };
+
   return (
     <form className="form-content">
       <label htmlFor="loanAmount"/>
@@ -30,7 +112,7 @@ function Form(): JSX.Element {
       <input 
         type="number"
         id="loanAmount"
-        value={loanAmount}
+        value={loanAmount === 0 ? "" : loanAmount}
         onChange={(e) => setLoanAmount(Number(e.target.value))}
       />
       
@@ -47,7 +129,7 @@ function Form(): JSX.Element {
       <input 
         type="number"
         id="installmentCount"
-        value={installmentCount}
+        value={installmentCount === 0 ? "" : installmentCount}
         onChange={(e) => setInstallmentCount(Number(e.target.value))}
       />
       <label htmlFor="loanMonth"/>
@@ -55,7 +137,7 @@ function Form(): JSX.Element {
       <input 
         type="number"
         id="loanMonth"
-        value={loanMonth}
+        value={loanMonth === 0 ? "" : loanMonth}
         onChange={(e) => setLoanMonth(Number(e.target.value))}
       />
       <label htmlFor="loanYear"/>
@@ -63,7 +145,7 @@ function Form(): JSX.Element {
       <input 
         type="number"
         id="loanYear"
-        value={loanYear}
+        value={loanYear === 0 ? "" : loanYear}
         onChange={(e) => setLoanYear(Number(e.target.value))}
       />
 
@@ -90,11 +172,13 @@ function Form(): JSX.Element {
           <input 
             type="number"
             id="correctionRate"
-            value={correctionRate}
+            value={correctionRate === 0 ? "" : correctionRate}
             onChange={(e) => setCorrectionRate(Number(e.target.value))}
           />
         </>
       )}
+
+      <button type="button" onClick={handleClick}>Calcular</button>
     </form>
   );
 }
