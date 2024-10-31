@@ -1,5 +1,5 @@
-import { ILoanCalculation } from './interfaces/ILoanCalculation';
-import { InstallmentDetail } from './interfaces/InstallmentDetail';
+import { ILoanCalculation } from './types/ILoanCalculation';
+import { InstallmentDetail } from './types/InstallmentDetail';
 
 abstract class LoanCalculator implements ILoanCalculation {
   loanAmount: number;

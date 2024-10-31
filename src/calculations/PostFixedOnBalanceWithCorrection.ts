@@ -1,4 +1,4 @@
-import { InstallmentDetail } from "./interfaces/InstallmentDetail";
+import { InstallmentDetail } from "./types/InstallmentDetail";
 import LoanCalculator from "./LoanCalculator";
 
 export default class PostFixedOnBalanceWithCorrection extends LoanCalculator {

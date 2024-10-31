@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CalculationOption } from "../calculations/interfaces/CalculationOption";
+import { CalculationOption } from "../calculations/types/CalculationOption";
 
 function Form(): JSX.Element {
   const [loanAmount, setLoanAmount] = useState<number | undefined>();
