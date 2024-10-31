@@ -47,11 +47,12 @@ export default class PostFixedOnBalanceWithCorrection extends LoanCalculator {
           paymentDate: formattedDate,
           principal: amortizacaoFixa.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
           interest: interest.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
-          correction: (0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
+          correction: total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
           totalPayment: totalPayment.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
           balance: balance.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
         };
       }
+      console.log(installmentDetail);
       installments.push(installmentDetail);
     }
   }
