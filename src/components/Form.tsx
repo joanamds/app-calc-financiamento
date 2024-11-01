@@ -1,4 +1,4 @@
-import { useState, useContext, useRef } from "react";
+import { useState, useContext, useRef, useEffect } from "react";
 import { CalculationOption } from "../calculations/types/CalculationOption";
 import LoanContext from "../context/LoanContext";
 import { Input, Label, Form, Button, Row, Col, FormGroup, InputGroupText, InputGroup} from 'reactstrap';
@@ -67,11 +67,16 @@ function LoanForm(): JSX.Element {
 
     const installmentDetails = calculator.calculateInstallments(loanAmount, Number(interestRate), installmentCount, loanMonth, loanYear, correctionRate);
     setTotalCalculation(installmentDetails);
-    const loanTableElement = document.getElementsByClassName("table-content")[0] as HTMLElement; 
-    if (loanTableElement) {
-      loanTableElement.scrollIntoView({ behavior: "smooth" });
-    }
   };
+
+useEffect(() => {
+  if (totalCalculation.length > 0) {
+        const loanTableElement = document.getElementsByClassName("table-content")[0] as HTMLElement; 
+        if (loanTableElement) {
+          loanTableElement.scrollIntoView({ behavior: "smooth" });
+        }
+  }
+}, [totalCalculation]);
 
   return (
     <Form className="form-content mt-4">
