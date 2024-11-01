@@ -67,6 +67,10 @@ function LoanForm(): JSX.Element {
 
     const installmentDetails = calculator.calculateInstallments(loanAmount, Number(interestRate), installmentCount, loanMonth, loanYear, correctionRate);
     setTotalCalculation(installmentDetails);
+    const loanTableElement = document.getElementById("loan-table"); 
+    if (loanTableElement) {
+      loanTableElement.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
