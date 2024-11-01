@@ -7,8 +7,7 @@ export default class PreFixedOnInstallment extends LoanCalculator {
     interestRate: number,
     installmentCount: number,
     loanMonth: number,
-    loanYear: number,
-    correctionRate?: number): InstallmentDetail[] {
+    loanYear: number): InstallmentDetail[] {
       const installments: InstallmentDetail[] = [];
       const amortizacaoFixa = loanAmount / installmentCount;
       const ratePercent = interestRate / 100;
@@ -41,7 +40,6 @@ export default class PreFixedOnInstallment extends LoanCalculator {
             paymentDate: formattedDate,
             principal: amortizacaoFixa.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
             interest: interest.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
-            correction: (0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
             totalPayment: totalPayment.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
             balance: balance.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
           };
