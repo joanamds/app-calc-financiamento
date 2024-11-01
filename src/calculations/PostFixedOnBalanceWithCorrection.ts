@@ -52,7 +52,6 @@ export default class PostFixedOnBalanceWithCorrection extends LoanCalculator {
           balance: balance.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
         };
       }
-      console.log(installmentDetail);
       installments.push(installmentDetail);
     }
   }
