@@ -11,8 +11,8 @@ function LoanForm(): JSX.Element {
   const [loanAmount, setLoanAmount] = useState<number>(0);
   const [interestRate, setInterestRate] = useState<string>("");
   const [installmentCount, setInstallmentCount] = useState<number>(0);
-  const [loanMonth, setLoanMonth] = useState<number>(0);
-  const [loanYear, setLoanYear] = useState<number>(0);
+  const [loanMonth, setLoanMonth] = useState<number>(1);
+  const [loanYear, setLoanYear] = useState<number>(2024);
   const [calculationType, setCalculationType] = useState<CalculationOption>(CalculationOption.PreFixedOnBalance);
   const [correctionRate, setCorrectionRate] = useState<number>(0);
   const { totalCalculation, setTotalCalculation } = useContext(LoanContext);
@@ -28,8 +28,8 @@ function LoanForm(): JSX.Element {
     setInterestRate("");
     setInstallmentCount(0);
     setCalculationType(CalculationOption.PreFixedOnBalance);
-    setLoanMonth(0);
-    setLoanYear(0);
+    setLoanMonth(1);
+    setLoanYear(2024);
     setCorrectionRate(0);
     setTotalCalculation([]);  
   };
@@ -99,13 +99,13 @@ function LoanForm(): JSX.Element {
         <Col md="4">
           <FormGroup>
             <Label htmlFor="loanMonth">Mês do Empréstimo:</Label>
-            <Input type="number" id="loanMonth" value={loanMonth || ""} onChange={(e) => setLoanMonth(Number(e.target.value))} />
+            <Input type="number" id="loanMonth" min="1" max="12" value={loanMonth || ""} onChange={(e) => setLoanMonth(Number(e.target.value))} />
           </FormGroup>
         </Col>
         <Col md="4">
           <FormGroup>
             <Label htmlFor="loanYear">Ano do Empréstimo:</Label>
-            <Input type="number" id="loanYear" value={loanYear || ""} onChange={(e) => setLoanYear(Number(e.target.value))} />
+            <Input type="number" id="loanYear" min="2024" max="2100" value={loanYear || ""} onChange={(e) => setLoanYear(Number(e.target.value))} />
           </FormGroup>
         </Col>
         <Col md="4">
