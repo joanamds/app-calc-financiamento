@@ -1,7 +1,7 @@
 import { useState, useContext, useRef } from "react";
 import { CalculationOption } from "../calculations/types/CalculationOption";
 import LoanContext from "../context/LoanContext";
-import { Input, Label, Form, Button, Row, Col, FormGroup } from 'reactstrap';
+import { Input, Label, Form, Button, Row, Col, FormGroup, InputGroupText, InputGroup} from 'reactstrap';
 import { PreFixedOnBalance, PreFixedOnInstallment, PostFixedOnBalanceWithCorrection, PostFixedOnBalanceWithInstallmentCorrection, PostFixedOnInstallmentWithCorrection } from "../calculations";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRedo } from '@fortawesome/free-solid-svg-icons';
@@ -79,9 +79,12 @@ function LoanForm(): JSX.Element {
           </FormGroup>
         </Col>
         <Col md="4">
-          <FormGroup>
+        <FormGroup>
             <Label htmlFor="interestRate">Taxa de Juros:</Label>
-            <Input type="text" id="interestRate" value={interestRate ? `${interestRate}%` : ""} onChange={handleInterestRateChange} />
+            <InputGroup>
+              <Input type="number" id="interestRate" value={interestRate} onChange={handleInterestRateChange} />
+              <InputGroupText>%</InputGroupText>
+            </InputGroup>
           </FormGroup>
         </Col>
         <Col md="4">
