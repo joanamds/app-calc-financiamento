@@ -13,7 +13,6 @@ function Header() {
         </NavbarText>
         <NavbarText>
             <FontAwesomeIcon icon={ faCoins } />
-            calcbank
         </NavbarText>
         </Navbar>
     );
