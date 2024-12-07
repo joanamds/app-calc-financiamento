@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/app-calc-financiamento/static/css/main.f8356636.css",
+    "main.js": "/app-calc-financiamento/static/js/main.097d4e58.js",
+    "static/js/453.aa51834c.chunk.js": "/app-calc-financiamento/static/js/453.aa51834c.chunk.js",
+    "index.html": "/app-calc-financiamento/index.html",
+    "main.f8356636.css.map": "/app-calc-financiamento/static/css/main.f8356636.css.map",
+    "main.097d4e58.js.map": "/app-calc-financiamento/static/js/main.097d4e58.js.map",
+    "453.aa51834c.chunk.js.map": "/app-calc-financiamento/static/js/453.aa51834c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f8356636.css",
+    "static/js/main.097d4e58.js"
+  ]
+}
